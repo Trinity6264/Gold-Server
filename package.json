@@ -5,8 +5,16 @@
   "main": "node api.js",
 
   "scripts": {
-    "start": "nodemon api.js",
-    "build": "node api.js"
+    "deploy": "publish",
+    "lint": "eslint --ignore-pattern .gitignore **/*.js",
+    "test": "nyc --reporter=html --reporter=text mocha --recursive test/",
+    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
+    "posttest": "npm run lint",
+
+
+    "build": "node index.js",
+    "start": "nodemon index.js"
+    
   },
   "keywords": [],
   "author": "",
