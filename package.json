@@ -2,7 +2,7 @@
   "name": "gold-admin-panel",
   "version": "1.0.0",
   "description": "",
-  "main": "node api.js",
+  "main": "index.js",
 
   "scripts": {
     "deploy": "publish",
