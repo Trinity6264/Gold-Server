@@ -17,6 +17,16 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, GET, POST, PUT, PATCH, DELETE" // what matters here is that OPTIONS is present
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // api Routes
@@ -38,7 +48,9 @@ const startServer = async () => {
     /*
     mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/?retryWrites=true&w=majority
     */
-    await dbSetup('mongodb://localhost:27017/');
+   const URL = "mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/gold?retryWrites=true&w=majority"
+  //  const URL = 'mongodb://localhost:27017/';
+    await dbSetup(URL);
     app.listen(port, console.log(`Server listening on port: ${port}`));
   } catch (error) {
     console.log(error.message);
