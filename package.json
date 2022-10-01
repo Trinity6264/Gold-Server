@@ -3,18 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "scripts": {
-    "deploy": "publish",
-    "lint": "eslint --ignore-pattern .gitignore **/*.js",
-    "test": "nyc --reporter=html --reporter=text mocha --recursive test/",
-    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
-    "posttest": "npm run lint",
-
-
     "build": "node index.js",
     "start": "nodemon index.js"
-    
   },
   "keywords": [],
   "author": "",
@@ -27,9 +18,7 @@
     "mongoose": "^6.5.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "netlify-lambda": "^2.0.15",
-    "nodemailer": "^6.7.8",
-    "serverless-http": "^3.0.2"
+    "nodemailer": "^6.7.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
