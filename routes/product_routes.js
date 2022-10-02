@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const upload = require("../middleware/upload_file");
 const {
   addProduct,
   deleteProduct,
@@ -7,12 +6,13 @@ const {
   searchProduct,
   updateProduct,
 } = require("../controllers/product_controller");
+const uploadImage= require('../middleware/file_cloudinary')
 const productRouter = Router();
 
 productRouter
   .route("/")
   .get(fetchProducts)
-  .post(upload.single("image"), addProduct)
+  .post(uploadImage, addProduct)
   .delete(deleteProduct);
 productRouter.route("/:id").patch(updateProduct);
 productRouter.route("/search/:title").get(searchProduct);

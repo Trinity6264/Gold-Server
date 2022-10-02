@@ -19,5 +19,4 @@ userRouter.route("/").get(findUsers).delete(deleteCustomer);
 userRouter.post("/search", findUser);
 userRouter.patch("/edit", updateUser);
 userRouter.patch("/adminupdate", adminUpdate);
-
 module.exports = userRouter;

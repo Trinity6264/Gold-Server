@@ -6,12 +6,7 @@ const { StatusCodes: st } = require("http-status-codes");
 const addProduct = AsyncWrapper(async (req, res) => {
   const { title, detail, price } = req.body;
   const model = new productModel({ title, detail, price });
-  if (!req.file) {
-    throw new CustomError("Image is required");
-  }
-  if (req.file) {
-    model.image = req.file.path;
-  }
+  model.image = req.url;
   const data = await model.save();
 
   if (!data) {

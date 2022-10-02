@@ -5,6 +5,7 @@ const purchaseRouter = require("./routes/purchase_routes");
 const trackRouter = require("./routes/track_routes");
 const adminRouter = require("./routes/admin_route");
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const { config } = require("dotenv");
 const morgan = require("morgan");
 const dbSetup = require("./db/db_service.js");
@@ -30,6 +31,14 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(
+  "/api/v1/product",
+  fileUpload({
+    useTempFiles: true,
+    limits: { fieldSize: 50 * 2024 * 1024 },
+  })
+);
+
 // api Routes
 app.use("/uploads", express.static("./uploads"));
 app.use("/api/v1/product", productRouter);
@@ -37,8 +46,6 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/purchase", purchaseRouter);
 app.use("/api/v1/track", trackRouter);
 app.use("/api/v1/admin", adminRouter);
-
-
 
 app.use(errorHandler);
 app.use(notFound);
@@ -50,8 +57,9 @@ const startServer = async () => {
     /*
     mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/?retryWrites=true&w=majority
     */
-   const URL = "mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/gold?retryWrites=true&w=majority"
-  //  const URL = 'mongodb://localhost:27017/';
+    const URL =
+      "mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/gold?retryWrites=true&w=majority";
+    //  const URL = 'mongodb://localhost:27017/';
     await dbSetup(URL);
     app.listen(port, console.log(`Server listening on port: ${port}`));
   } catch (error) {
@@ -60,5 +68,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-
