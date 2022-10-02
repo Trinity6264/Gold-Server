@@ -1,16 +1,23 @@
 const cloudinary = require("cloudinary").v2;
-
+const CustomError = require("../error/custom_error");
 const uploadImage = async (req, res, next) => {
   const image = req.files.image;
-  const result = await cloudinary.uploader.upload(image.tempFilePath, {
-    public_id: `${Date.now()}`,
-    folder: "Gold",
-    width: 500,
-    height: 500,
-    crop: "scale",
-  });
-  req.url = result.url;
-  next();
+  try {
+    const result = await cloudinary.uploader.upload(image.tempFilePath, {
+      public_id: `${Date.now()}`,
+      folder: "Gold",
+      width: 500,
+      height: 500,
+      crop: "scale",
+    });
+    if (!result) {
+      throw new CustomError("Post was not successful");
+    }
+    req.url = result.url;
+    next();
+  } catch (error) {
+    throw new CustomError(error.message);
+  }
 };
 
 cloudinary.config({
