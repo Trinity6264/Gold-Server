@@ -15,7 +15,6 @@ const userRouter = Router();
 userRouter.post("/register", registerUser);
 userRouter.post("/login", loginUser);
 userRouter.post("/resetpassword", resetPassword);
-userRouter.post("/adminlogin", loginAdmin);
 userRouter.route("/").get(findUsers).delete(deleteCustomer);
 userRouter.post("/search", findUser);
 userRouter.patch("/edit", updateUser);
