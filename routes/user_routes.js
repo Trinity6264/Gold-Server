@@ -6,7 +6,6 @@ const {
   loginUser,
   updateUser,
   adminUpdate,
-  loginAdmin,
   resetPassword,
   deleteCustomer,
 } = require("../controllers/user_controller");

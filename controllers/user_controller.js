@@ -41,7 +41,7 @@ const registerUser = AsyncWrapper(async (req, res) => {
   }).save();
 
   //   send email to the user
-  const play = await sendVerificationEmail({
+   await sendVerificationEmail({
     email: resp.email,
     name: resp.username,
     // localhost:
@@ -74,43 +74,6 @@ const loginUser = AsyncWrapper(async (req, res) => {
   }
   if (!data.isEmailVerify) {
     throw new CustomError("Please verify your account");
-  }
-  if (data.isBlocked === true) {
-    throw new CustomError(
-      "Account has been temporary blocked,Please contact the team"
-    );
-  }
-  return res.status(200).json({
-    status: true,
-    msg: "User login succesful",
-    data: {
-      id: data.id,
-      username: data.username,
-      email: data.email,
-    },
-  });
-});
-const loginAdmin = AsyncWrapper(async (req, res) => {
-  const { email, password } = req.body;
-  if (!email) {
-    throw new CustomError("Provide valid email");
-  }
-  if (!password) {
-    throw new CustomError("Provide valid password");
-  }
-  const data = await UserModel.findOne({ $or: [{ email }] });
-  if (!data) {
-    throw new CustomError("Email provided was not found");
-  }
-  const confirmPassword = await decrptyPassword(password, data.password);
-  if (!confirmPassword) {
-    throw new CustomError("User password was incorrect");
-  }
-  if (!data.isEmailVerify) {
-    throw new CustomError("Please verify your account");
-  }
-  if (!data.isAdmin) {
-    throw new CustomError("You are not authourized");
   }
   if (data.isBlocked === true) {
     throw new CustomError(
@@ -237,7 +200,6 @@ const deleteCustomer = AsyncWrapper(async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
-  loginAdmin,
   updateUser,
   findUser,
   findUsers,

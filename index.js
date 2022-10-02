@@ -3,6 +3,7 @@ const productRouter = require("./routes/product_routes");
 const userRouter = require("./routes/user_routes");
 const purchaseRouter = require("./routes/purchase_routes");
 const trackRouter = require("./routes/track_routes");
+const adminRouter = require("./routes/admin_route");
 const express = require("express");
 const { config } = require("dotenv");
 const morgan = require("morgan");
@@ -35,6 +36,7 @@ app.use("/api/v1/product", productRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/purchase", purchaseRouter);
 app.use("/api/v1/track", trackRouter);
+app.use("/api/v1/admin", adminRouter);
 
 
 
