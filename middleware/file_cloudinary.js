@@ -4,7 +4,7 @@ const uploadImage = async (req, res, next) => {
   const image = req.files.image;
   const result = await cloudinary.uploader.upload(image.tempFilePath, {
     public_id: `${Date.now()}`,
-    folder: "play",
+    folder: "Gold",
     width: 500,
     height: 500,
     crop: "scale",
