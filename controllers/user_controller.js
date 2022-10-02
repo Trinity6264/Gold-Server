@@ -45,7 +45,7 @@ const registerUser = AsyncWrapper(async (req, res) => {
     email: resp.email,
     name: resp.username,
     // localhost:
-    origin: "http://localhost:3000/",
+    origin: "https://serverless-idxhr2bg7-trinity6264.vercel.app",
     token: token,
   });
   return res.status(201).json({
