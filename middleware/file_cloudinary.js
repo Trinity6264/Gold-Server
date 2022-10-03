@@ -8,7 +8,7 @@ const uploadImage = async (req, res, next) => {
       folder: "Gold",
       width: 500,
       height: 500,
-      crop: "scale",
+      crop: "fill",
     });
     if (!result) {
       throw new CustomError("Post was not successful");

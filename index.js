@@ -35,6 +35,7 @@ app.use(
   "/api/v1/product",
   fileUpload({
     useTempFiles: true,
+    tempFileDir:"./uploads/",
     limits: { fieldSize: 50 * 2024 * 1024 },
   })
 );
