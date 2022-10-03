@@ -1,12 +1,10 @@
 const AsyncWrapper = require("../helper/async_wrapper");
 const UserModel = require("../model/user_model");
 const CustomError = require("../error/custom_error");
-const {
-  decrptyPassword,
-} = require("../helper/password_encrypt");
+const { decrptyPassword } = require("../helper/password_encrypt");
 const { StatusCodes: st } = require("http-status-codes");
 
- const loginAdmin = AsyncWrapper(async (req, res) => {
+const loginAdmin = AsyncWrapper(async (req, res) => {
   const { email, password } = req.body;
   if (!email) {
     throw new CustomError("Provide valid email");
@@ -43,4 +41,22 @@ const { StatusCodes: st } = require("http-status-codes");
     },
   });
 });
-module.exports = loginAdmin
+const findAdmin = AsyncWrapper(async (req, res) => {
+  const { id } = req.body;
+
+  const data = await UserModel.findById(id);
+  if (!data) {
+    throw new CustomError("User Not found");
+  }
+
+  return res.status(st.OK).json({
+    status: true,
+    msg: "User found",
+    data: {
+      id: data.id,
+      username: data.username,
+      email: data.email,
+    },
+  });
+});
+module.exports = { loginAdmin, findAdmin };
