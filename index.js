@@ -5,7 +5,6 @@ const purchaseRouter = require("./routes/purchase_routes");
 const trackRouter = require("./routes/track_routes");
 const adminRouter = require("./routes/admin_route");
 const express = require("express");
-const fileUpload = require("express-fileupload");
 const { config } = require("dotenv");
 const morgan = require("morgan");
 const dbSetup = require("./db/db_service.js");
