@@ -35,6 +35,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   "/api/v1/product",
   fileUpload({
+    useTempFiles: true,
+    tempFileDir: path.join(__dirname, "/tmp/"),
+    abortOnLimit:true,
+    preserveExtension:true,
+    safeFileNames:true,
     limits: { fieldSize: 50 * 2024 * 1024 },
   })
 );
