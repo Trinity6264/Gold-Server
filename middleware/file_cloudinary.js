@@ -1,9 +1,9 @@
 const cloudinary = require("cloudinary").v2;
 const CustomError = require("../error/custom_error");
 const uploadImage = async (req, res, next) => {
-  const image = req.files.image;
+  const {path} = req.file;
   try {
-    const result = await cloudinary.uploader.upload(image.tempFilePath, {
+    const result = await cloudinary.uploader.upload(path, {
       public_id: `${Date.now()}`,
       folder: "Gold",
       width: 500,

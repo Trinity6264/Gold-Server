@@ -1,4 +1,6 @@
 const { Router } = require("express");
+const upload = require("../middleware/multer");
+
 const {
   addProduct,
   deleteProduct,
@@ -6,13 +8,13 @@ const {
   searchProduct,
   updateProduct,
 } = require("../controllers/product_controller");
-const uploadImage= require('../middleware/file_cloudinary')
+const uploadImage = require("../middleware/file_cloudinary");
 const productRouter = Router();
-
+const type = upload.single("image");
 productRouter
   .route("/")
   .get(fetchProducts)
-  .post(uploadImage, addProduct)
+  .post(type, uploadImage, addProduct)
   .delete(deleteProduct);
 productRouter.route("/:id").patch(updateProduct);
 productRouter.route("/search/:title").get(searchProduct);

@@ -32,16 +32,6 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(
-  "/api/v1/product",
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: path.join(__dirname, "tmp"),
-    abortOnLimit:true,
-    createParentPath:true,
-    limits: { fieldSize: 50 * 2024 * 1024 },
-  })
-);
 
 // api Routes
 app.use("/uploads", express.static("./uploads"));
@@ -58,9 +48,6 @@ const port = process.env.PORT || 8080;
 
 const startServer = async () => {
   try {
-    /*
-    mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/?retryWrites=true&w=majority
-    */
     const URL =
       "mongodb+srv://autumshipmentalics:9KHRsSwbcvm7VopY@autum.lrzknyd.mongodb.net/gold?retryWrites=true&w=majority";
     //  const URL = 'mongodb://localhost:27017/';
