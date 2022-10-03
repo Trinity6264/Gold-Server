@@ -38,8 +38,7 @@ app.use(
     useTempFiles: true,
     tempFileDir: path.join(__dirname, "/tmp/"),
     abortOnLimit:true,
-    preserveExtension:true,
-    safeFileNames:true,
+    createParentPath:true,
     limits: { fieldSize: 50 * 2024 * 1024 },
   })
 );
