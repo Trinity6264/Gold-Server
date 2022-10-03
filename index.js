@@ -11,6 +11,7 @@ const morgan = require("morgan");
 const dbSetup = require("./db/db_service.js");
 const notFound = require("./helper/not_found.js");
 const errorHandler = require("./helper/error_handler.js");
+
 config();
 
 const app = express();
@@ -35,7 +36,7 @@ app.use(
   "/api/v1/product",
   fileUpload({
     useTempFiles: true,
-    tempFileDir:"./uploads/",
+    tempFileDir: path.join(__dirname, "/uploads/"),
     limits: { fieldSize: 50 * 2024 * 1024 },
   })
 );
