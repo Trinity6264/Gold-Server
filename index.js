@@ -36,7 +36,7 @@ app.use(
   "/api/v1/product",
   fileUpload({
     useTempFiles: true,
-    tempFileDir: path.join(__dirname, "/tmp/"),
+    tempFileDir: path.join(__dirname, "tmp"),
     abortOnLimit:true,
     createParentPath:true,
     limits: { fieldSize: 50 * 2024 * 1024 },
